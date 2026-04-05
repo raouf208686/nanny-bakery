@@ -3,113 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanny Bakery | Studio Prestige</title>
+    <title>Studio Création | Premium Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg: #fff5f8; --card: #ffffff; --text: #4a0e2e; --accent: #d4a373; 
-            --info: #ffb703; --border: #fceef2; --btn-text: #ffffff;
+            --info: #ffb703; --border: #fceef2; 
         }
         [data-theme="dark"] {
             --bg: #1a0510; --card: #2d0a1c; --text: #fdf2f7; --accent: #e9c46a; 
-            --info: #fb8500; --border: #4a0e2e; --btn-text: #1a0510;
+            --info: #fb8500; --border: #4a0e2e;
         }
 
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; justify-content: center; transition: 0.4s; overflow-x: hidden; }
-        
         .welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(74, 14, 46, 0.98); z-index: 1000; display: flex; justify-content: center; align-items: center; text-align: center; color: white; padding: 30px; box-sizing: border-box; transition: 0.5s; }
         .welcome-content { max-width: 400px; animation: fadeInUp 0.8s ease; }
         .welcome-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; margin-bottom: 15px; color: var(--accent); }
         .welcome-content p { font-size: 14px; line-height: 1.6; opacity: 0.9; margin-bottom: 25px; }
-        .btn-start { background: var(--accent); color: var(--text); border: none; padding: 12px 30px; border-radius: 25px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-start { background: var(--accent); color: var(--text); border: none; padding: 12px 35px; border-radius: 25px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .app-container { width: 100%; max-width: 500px; background: var(--card); padding: 25px; border-radius: 35px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); position: relative; border: 1px solid var(--border); }
-        .info-i { display: inline-block; width: 18px; height: 18px; background: var(--info); color: white; border-radius: 50%; font-size: 11px; text-align: center; line-height: 18px; cursor: help; margin-left: 8px; font-weight: bold; }
+        .app-container { width: 100%; max-width: 500px; background: var(--card); padding: 25px; border-radius: 35px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); position: relative; border: 1px solid var(--border); margin-bottom: 50px; }
         .header-title { text-align: center; margin-bottom: 25px; border-bottom: 1px double var(--border); padding-bottom: 15px; }
         .header-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; margin: 0; letter-spacing: 4px; text-transform: uppercase; }
         
-        .section-box { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 25px; margin-bottom: 20px; position: relative; }
+        .section-box { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 25px; margin-bottom: 20px; }
         .unit-price-tag { font-size: 9px; color: var(--accent); font-weight: 600; margin-top: 4px; display: block; }
         
         .option-card { display: flex; justify-content: space-between; align-items: center; padding: 14px; border-radius: 15px; margin-bottom: 10px; cursor: pointer; background: var(--bg); transition: 0.3s; border: 1px solid transparent; }
-        .option-card.selected { background: var(--text); color: var(--card); border-color: var(--accent); }
+        .option-card.selected { background: var(--text); color: var(--card); border-color: var(--accent); transform: scale(1.02); }
         
         .footer-total { margin-top: 30px; padding: 30px; background: var(--text); border-radius: 30px; text-align: center; color: var(--card); }
-        .total-val { font-family: 'Cormorant Garamond', serif; font-size: 45px; margin: 10px 0; color: var(--accent); }
-        .btn-wa { background: linear-gradient(45deg, #d4a373, #faedcd, #d4a373); background-size: 200% auto; color: var(--text); width: 100%; padding: 18px; border: none; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 15px; transition: 0.5s; }
-        .btn-wa:hover { background-position: right center; }
+        .total-val { font-family: 'Cormorant Garamond', serif; font-size: 45px; margin: 10px 0; color: var(--accent); text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        
+        .btn-wa { background: linear-gradient(45deg, #d4a373, #faedcd, #d4a373); background-size: 200% auto; color: var(--text); width: 100%; padding: 18px; border: none; border-radius: 18px; font-weight: 800; cursor: pointer; margin-top: 15px; transition: 0.5s; text-transform: uppercase; letter-spacing: 1px; }
+        
+        input { background: transparent; color: var(--text); border: none; border-bottom: 1px solid var(--border); width: 100%; padding: 5px; font-weight: 700; text-align: center; }
+        input[type="date"] { font-family: 'Montserrat', sans-serif; cursor: pointer; }
+
+        .admin-panel { display: none; margin-bottom: 20px; padding: 20px; border: 2px dashed var(--accent); border-radius: 20px; background: #fffdf5; color: #4a0e2e; }
+
+        .signature { text-align: center; margin-top: 30px; padding-bottom: 20px; font-size: 10px; opacity: 0.7; letter-spacing: 1px; }
+        .signature a { color: var(--accent); text-decoration: none; font-weight: bold; border-bottom: 1px solid var(--accent); }
+        
+        .admin-btn-small { border:none; background:var(--accent); color:white; border-radius:5px; font-size:8px; cursor:pointer; padding:2px 4px; margin-left:4px; text-transform:uppercase; }
+        .badge-mode { font-size: 8px; padding: 2px 6px; border-radius: 10px; background: var(--border); color: var(--accent); margin-top: 5px; display: inline-block; }
     </style>
 </head>
 <body data-theme="light">
 
 <div id="welcome-modal" class="welcome-overlay">
     <div class="welcome-content">
-        <h2>Bienvenue chez Nanny Bakery</h2>
-        <p>Découvrez notre <b>Studio de Création Digital</b>. <br><br> Composez votre gâteau idéal étape par étape. Chaque choix ajuste votre devis pour une transparence totale.</p>
-        <button class="btn-start" onclick="closeWelcome()">Commencer ma création</button>
+        <h2>Votre Création Unique</h2>
+        <p>Composez votre projet sur-mesure et visualisez votre devis instantanément.</p>
+        <button class="btn-start" onclick="closeWelcome()">Commencer</button>
     </div>
 </div>
 
 <div class="app-container">
     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-        <button style="background:var(--text); color:var(--card); border:none; padding:8px 15px; border-radius:20px; font-size:10px; cursor:pointer;" onclick="toggleTheme()">🌓 Thème</button>
-        <button style="background:var(--text); color:var(--card); border:none; padding:8px 15px; border-radius:20px; font-size:10px; cursor:pointer;" id="modeBtn" onclick="toggleAdmin()">⚙️ Atelier</button>
+        <button style="background:var(--text); color:white; border:none; padding:8px 15px; border-radius:20px; font-size:10px; cursor:pointer;" onclick="toggleTheme()">🌓 Thème</button>
+        <button style="background:var(--text); color:white; border:none; padding:8px 15px; border-radius:20px; font-size:10px; cursor:pointer;" id="modeBtn" onclick="toggleAdmin()">⚙️ Atelier</button>
     </div>
 
     <div class="header-title">
-        <h1>Nanny Bakery</h1>
-        <p style="font-size: 9px; opacity: 0.6; letter-spacing: 2px;">VOTRE IMAGINATION, NOTRE SAVOIR-FAIRE</p>
+        <h1 id="shop-name-display">NANNY BAKERY</h1>
+        <p id="shop-tagline" style="font-size: 9px; opacity: 0.6; letter-spacing: 2px;">L'ARTISANAT SUR-MESURE</p>
     </div>
 
-    <div id="admin-panel" style="display:none; margin-bottom:20px; padding:15px; border:1px dashed var(--accent); border-radius:15px; background:#fffdf5;">
-        <p style="font-size:10px; font-weight:800; color:#4a0e2e">⚙️ CONFIGURATION DES TARIFS</p>
-        <div style="display:flex; justify-content:space-between; font-size:11px; color:#4a0e2e">
-            <span>Prix/Part: <input type="number" id="base_p" style="width:55px" oninput="updateConfig()"> DA</span>
-            <span>Prix/Étage: <input type="number" id="etage_p" style="width:55px" oninput="updateConfig()"> DA</span>
+    <div id="admin-panel" class="admin-panel">
+        <p style="font-size:11px; font-weight:800; text-align:center;">✨ BIENVENUE CHEF ! (MODE ÉDITION)</p>
+        <div style="margin-bottom:15px; font-size:11px;">
+            Nom Boutique: <input type="text" id="shop_n_input" oninput="updateConfig()" style="width: 80%;">
         </div>
-        <button onclick="addNewCategory()" style="width:100%; margin-top:10px; font-size:10px; cursor:pointer; background:var(--accent); border:none; color:white; padding:5px; border-radius:5px;">+ Nouvelle Catégorie</button>
+        <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:15px;">
+            <div style="width:45%">Prix/Unité: <input type="number" id="base_p" oninput="updateConfig()"></div>
+            <div style="width:45%">Prix/Extra: <input type="number" id="etage_p" oninput="updateConfig()"></div>
+        </div>
+        <button onclick="addNewCategory()" style="width:100%; background:var(--accent); color:white; border:none; padding:8px; border-radius:10px; cursor:pointer; font-size:10px; font-weight:700;">+ Nouvelle Catégorie</button>
     </div>
 
     <div class="section-box">
-        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-            <span style="font-size:12px; font-weight:700; color:var(--accent);">📐 DIMENSIONS DU PROJET <span class="info-i" data-tip="La base de calcul de votre gâteau.">?</span></span>
-        </div>
-        <div style="display:flex; gap:15px;">
-            <div style="flex:1">
-                <small>Nombre de Parts</small><br>
-                <input type="number" id="parts" value="10" oninput="calculate()" style="width:100%; border:none; border-bottom:1px solid #eee; padding:5px; font-weight:700; color:var(--text); background:transparent;">
+        <span style="font-size:12px; font-weight:700; color:var(--accent);">📐 DÉTAILS DU PROJET</span>
+        <div style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
+            <div style="flex:1; min-width:100px;">
+                <small>Quantité / Parts</small><br>
+                <input type="number" id="parts" value="10" oninput="calculate()">
                 <span class="unit-price-tag" id="display-p-part"></span>
             </div>
-            <div style="flex:1">
-                <small>Nombre d'Étages</small><br>
-                <input type="number" id="etages" value="1" oninput="calculate()" style="width:100%; border:none; border-bottom:1px solid #eee; padding:5px; font-weight:700; color:var(--text); background:transparent;">
+            <div style="flex:1; min-width:100px;">
+                <small>Complexité / Étages</small><br>
+                <input type="number" id="etages" value="1" oninput="calculate()">
                 <span class="unit-price-tag" id="display-p-etage"></span>
             </div>
+            <div style="width:100%; margin-top:10px; border-top:1px dashed var(--border); padding-top:15px;">
+                <small>Date de l'événement</small><br>
+                <input type="date" id="event-date" style="font-size:12px; text-align: left; width: 100%;">
+            </div>
         </div>
-        <p style="font-size: 9px; margin-top: 15px; opacity: 0.7; font-style: italic;">* Le prix de base inclut la confection artisanale et les ingrédients premium.</p>
     </div>
 
     <div id="dynamic-sections"></div>
 
     <div class="footer-total">
-        <div style="font-size: 10px; opacity: 0.7; letter-spacing: 1px;">ESTIMATION DE VOTRE DEVIS</div>
+        <div style="font-size: 10px; opacity: 0.7; letter-spacing: 1px;">ESTIMATION DU DEVIS</div>
         <div class="total-val"><span id="total-display">0</span> DA</div>
-        <p style="font-size: 9px; margin-bottom: 15px; opacity: 0.8;">Ce tarif est une base de discussion pour votre projet personnalisé.</p>
-        <button class="btn-wa" onclick="sendWA()">RÉSERVER VIA WHATSAPP</button>
+        <button class="btn-wa" onclick="sendWA()">Commander via WhatsApp</button>
+    </div>
+
+    <div class="signature">
+        DESIGNED BY <a href="https://wa.me/213792269732" target="_blank">RAOUF STUDIO</a>
     </div>
 </div>
 
 <script>
     let isAdmin = false;
-    let database = JSON.parse(localStorage.getItem('nannyV13')) || {
+    let database = JSON.parse(localStorage.getItem('nannyV_PRO_V4')) || {
         sections: [
-            {title: "Saveurs Biscuit", tip: "Le socle de votre gâteau.", items: [{n: "Génoise Vanille", p: 0, s: true}]},
-            {title: "Crèmes & Fourrages", tip: "L'onctuosité intérieure.", items: [{n: "Ganache Chocolat", p: 500, s: true}]},
-            {title: "Éléments Décoratifs", tip: "La touche finale visuelle.", items: [{n: "Fleurs Fraîches", p: 1500, s: false}]}
+            {title: "Options de Base", isMultiple: false, items: [{n: "Classique", p: 0, s: true}]},
+            {title: "Suppléments", isMultiple: true, items: [{n: "Premium", p: 500, s: false}]}
         ],
-        config: { base: 600, etage: 2000 }
+        config: { shopName: "NANNY BAKERY", base: 600, etage: 2000, whatsapp: "213550193993" }
     };
 
     function closeWelcome() { document.getElementById('welcome-modal').style.opacity = '0'; setTimeout(() => document.getElementById('welcome-modal').style.display = 'none', 500); }
@@ -117,13 +132,13 @@
 
     function toggleAdmin() {
         if (!isAdmin) {
-            if (prompt("Code Secret Atelier :") === "1291") {
+            if (prompt("Code Sécurité Atelier :") === "1234") {
                 isAdmin = true;
                 document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('modeBtn').innerText = "✔️ Boutique";
+                document.getElementById('modeBtn').innerText = "✔️ Terminer";
                 document.getElementById('base_p').value = database.config.base;
                 document.getElementById('etage_p').value = database.config.etage;
-                alert("✨ Bienvenue Chef ! Vos outils sont prêts.");
+                document.getElementById('shop_n_input').value = database.config.shopName;
             }
         } else {
             isAdmin = false;
@@ -134,52 +149,102 @@
     }
 
     function render() {
+        document.getElementById('shop-name-display').innerText = database.config.shopName;
         const container = document.getElementById('dynamic-sections');
         container.innerHTML = '';
+        
         database.sections.forEach((sec, sIdx) => {
-            let html = `<div class="section-box"><div style="display:flex; justify-content:space-between; margin-bottom:12px;"><span style="font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase;">${sec.title} <span class="info-i" data-tip="${sec.tip}">?</span></span>${isAdmin ? `<button onclick="deleteCategory(${sIdx})" style="color:red; background:none; border:none; font-size:10px; cursor:pointer;">×</button>` : ''}</div>`;
+            let html = `
+            <div class="section-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <div>
+                        <span style="font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase;">${sec.title}</span><br>
+                        <span class="badge-mode">${sec.isMultiple ? 'SÉLECTION LIBRE' : 'CHOIX UNIQUE'}</span>
+                    </div>
+                    ${isAdmin ? `<div>
+                        <button onclick="toggleSecMode(${sIdx})" class="admin-btn-small">${sec.isMultiple ? 'Unique' : 'Libre'}</button>
+                        <button onclick="deleteCategory(${sIdx})" style="color:red; background:none; border:none; cursor:pointer; font-weight:bold; margin-left:10px;">×</button>
+                    </div>` : ''}
+                </div>`;
+            
             sec.items.forEach((item, iIdx) => {
-                html += `<div class="option-card ${item.s ? 'selected' : ''}" onclick="toggleItem(${sIdx}, ${iIdx})"><span>${item.n}</span><span><span style="font-weight:700;">${item.p} DA</span>${isAdmin ? `<button onclick="event.stopPropagation(); deleteItem(${sIdx}, ${iIdx})" style="margin-left:10px; border:none; background:none; color:red;">×</button>` : ''}</span></div>`;
+                html += `
+                <div class="option-card ${item.s ? 'selected' : ''}" onclick="toggleItem(${sIdx}, ${iIdx})">
+                    <span>${item.n}</span>
+                    <span style="display:flex; align-items:center;">
+                        <span style="font-weight:700;">${item.p} DA</span>
+                        ${isAdmin ? `<button onclick="event.stopPropagation(); editItemPrice(${sIdx}, ${iIdx})" class="admin-btn-small">PRIX</button>
+                                     <button onclick="event.stopPropagation(); deleteItem(${sIdx}, ${iIdx})" style="margin-left:5px; border:none; background:none; color:red; font-weight:bold; cursor:pointer;">×</button>` : ''}
+                    </span>
+                </div>`;
             });
-            if (isAdmin) html += `<button onclick="addItem(${sIdx})" style="width:100%; border:1px dashed var(--accent); background:none; color:var(--accent); padding:8px; border-radius:10px; cursor:pointer; font-size:10px;">+ Ajouter Option</button>`;
+
+            if (isAdmin) html += `<button onclick="addItem(${sIdx})" style="width:100%; border:1px dashed var(--accent); background:none; color:var(--accent); padding:8px; border-radius:10px; cursor:pointer; font-size:10px; margin-top:10px;">+ Ajouter Option</button>`;
             container.innerHTML += html + `</div>`;
         });
         calculate();
     }
 
+    function toggleItem(sIdx, iIdx) {
+        const sec = database.sections[sIdx];
+        if (sec.isMultiple) {
+            sec.items[iIdx].s = !sec.items[iIdx].s;
+        } else {
+            const currentState = sec.items[iIdx].s;
+            sec.items.forEach(item => item.s = false);
+            sec.items[iIdx].s = !currentState;
+        }
+        save(); render();
+    }
+
+    function toggleSecMode(sIdx) {
+        database.sections[sIdx].isMultiple = !database.sections[sIdx].isMultiple;
+        save(); render();
+    }
+
     function calculate() {
         const p = parseInt(document.getElementById('parts').value) || 0;
         const e = parseInt(document.getElementById('etages').value) || 1;
-        document.getElementById('display-p-part').innerText = database.config.base + " DA / part";
-        document.getElementById('display-p-etage').innerText = "+" + database.config.etage + " DA dès le 2ème";
-        
+        document.getElementById('display-p-part').innerText = database.config.base + " DA / unité";
+        document.getElementById('display-p-etage').innerText = "+" + database.config.etage + " DA / extra";
         let total = (p * database.config.base) + ((e - 1) * database.config.etage);
         database.sections.forEach(sec => sec.items.forEach(item => { if (item.s) total += item.p; }));
         document.getElementById('total-display').innerText = total.toLocaleString();
     }
 
     function updateConfig() {
+        database.config.shopName = document.getElementById('shop_n_input').value;
         database.config.base = parseInt(document.getElementById('base_p').value) || 0;
         database.config.etage = parseInt(document.getElementById('etage_p').value) || 0;
-        save(); calculate();
+        save(); render();
     }
 
-    function toggleItem(sIdx, iIdx) { database.sections[sIdx].items[iIdx].s = !database.sections[sIdx].items[iIdx].s; save(); render(); }
-    function addNewCategory() { const t = prompt("Nom de la catégorie :"); const tip = prompt("Description rapide :"); if(t) { database.sections.push({title: t, tip: tip, items: []}); save(); render(); } }
-    function deleteCategory(idx) { if(confirm("Supprimer cette section ?")) { database.sections.splice(idx, 1); save(); render(); } }
+    function editItemPrice(sIdx, iIdx) {
+        const newPrice = prompt("Nouveau prix :", database.sections[sIdx].items[iIdx].p);
+        if (newPrice !== null) { database.sections[sIdx].items[iIdx].p = parseInt(newPrice) || 0; save(); render(); }
+    }
+
+    function addNewCategory() { const t = prompt("Nom de la section :"); if(t) { database.sections.push({title: t, isMultiple: false, items: []}); save(); render(); } }
+    function deleteCategory(idx) { if(confirm("Supprimer ?")) { database.sections.splice(idx, 1); save(); render(); } }
     function addItem(sIdx) { const n = prompt("Nom de l'option :"); const p = prompt("Prix (DA) :"); if(n) { database.sections[sIdx].items.push({n: n, p: parseInt(p)||0, s: false}); save(); render(); } }
     function deleteItem(sIdx, iIdx) { database.sections[sIdx].items.splice(iIdx, 1); save(); render(); }
-    function save() { localStorage.setItem('nannyV13', JSON.stringify(database)); }
+    function save() { localStorage.setItem('nannyV_PRO_V4', JSON.stringify(database)); }
 
     function sendWA() {
-        let msg = `*✨ DEVIS PERSONNALISÉ NANNY BAKERY ✨*\n\n`;
-        msg += `📏 *Structure* : ${document.getElementById('parts').value} parts / ${document.getElementById('etages').value} étage(s)\n\n`;
+        const dateInput = document.getElementById('event-date').value;
+        const formattedDate = dateInput ? new Date(dateInput).toLocaleDateString('fr-FR') : "Non spécifiée";
+
+        let msg = `*✨ DEVIS - ${database.config.shopName.toUpperCase()} ✨*\n\n`;
+        msg += `📅 *DATE* : ${formattedDate}\n`;
+        msg += `📏 *Format* : ${document.getElementById('parts').value} unités / ${document.getElementById('etages').value} extra(s)\n\n`;
+        
         database.sections.forEach(sec => {
             let sel = sec.items.filter(i => i.s).map(i => i.n);
             if(sel.length) msg += `*${sec.title}* : ${sel.join(', ')}\n`;
         });
-        msg += `\n💰 *TOTAL ESTIMÉ : ${document.getElementById('total-display').innerText} DA*`;
-        window.open(`https://wa.me/213550193993?text=${encodeURIComponent(msg)}`);
+        
+        msg += `\n💰 *TOTAL : ${document.getElementById('total-display').innerText} DA*`;
+        window.open(`https://wa.me/${database.config.whatsapp}?text=${encodeURIComponent(msg)}`);
     }
     render();
 </script>
